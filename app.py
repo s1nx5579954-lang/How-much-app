@@ -1,4 +1,3 @@
-cat << 'EOF' > app.py
 import streamlit as st
 import random
 
@@ -321,4 +320,3 @@ elif st.session_state.step == "result":
     if st.button("RETRY"):
         st.session_state.step = "setup"
         st.rerun()
-EOF
