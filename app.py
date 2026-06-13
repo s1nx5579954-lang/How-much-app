@@ -230,7 +230,7 @@ elif st.session_state.step == "change_turn":
 elif st.session_state.step == "p2_turn":
     idx = st.session_state.current_q
     st.subheader(f"TURN : {st.session_state.name2} ({idx + 1} / 16)")
-    st.write(f"⚠️ {st.session_state.name1} さんの回答を予想するか、あなたの感覚で答えてください！")
+    st.write(f"⚠️ {st.session_state.name1} さんの感覚で答えてください！")
     st.progress((idx + 1) / 16)
     
     q_data = QUESTIONS[idx]
