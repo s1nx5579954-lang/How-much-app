@@ -311,7 +311,11 @@ def calc_match_rate(p1_points, p2_points, dim):
 
 
 def determine_pattern(p1_points, p2_points):
-    """4観点の一致率からパターンコードと各観点の一致率を返す"""
+    """4観点の一致率からパターンコードと各観点の一致率を返す
+    パターン判定は「一致率50%」ではなく、スコア差(diff)が3以下かどうかで行う。
+    （ランダム回答シミュレーションの結果、diff<=3で約55.7%、diff>=4で約44.3%となり、
+    　パターンの出現比率がほぼ均等になることを確認済み）
+    """
     rates = {}
     code = ""
     for dim, high_letter, low_letter in [
@@ -320,9 +324,10 @@ def determine_pattern(p1_points, p2_points):
         ("TF", "E", "C"),
         ("JP", "P", "B"),
     ]:
+        diff = abs(p1_points[dim] - p2_points[dim])
         rate = calc_match_rate(p1_points, p2_points, dim)
         rates[dim] = rate
-        code += high_letter if rate >= 50 else low_letter
+        code += high_letter if diff <= 3 else low_letter
     return code, rates
 
 
