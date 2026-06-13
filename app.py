@@ -290,11 +290,8 @@ elif st.session_state.step == "result":
         comment = "【未知の世界の2人】全く違う性質の星に生まれたような組み合わせ。だからこそ新鮮で、相手のやることなすことが予測不能で面白いと感じるはず。お互いのルールを尊重し合えれば最強です。"
         
     st.markdown(f'<div class="result-comment">{comment}</div>', unsafe_allow_html=True)
-    
-    if st.button("RETRY"):
-        st.session_state.step = "setup"
-        st.rerun()
-# 〜（中略：スコア計算やデータの定義など）〜
+
+    # 〜（中略：スコア計算やデータの定義など）〜
 
 # --- アプリ画面での割合表示部分 ---
 st.subheader("📊 4観点のバランス診断結果")
@@ -323,3 +320,7 @@ for title, data in dimensions_pct.items():
     # 標準機能のプログレスバーでメーターを表示（0.0 〜 1.0 の値にするため 100 で割る）
     st.progress(left_pct / 100)
     st.write("---") # 区切り線
+    
+    if st.button("RETRY"):
+        st.session_state.step = "setup"
+        st.rerun()
