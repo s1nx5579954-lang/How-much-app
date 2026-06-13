@@ -294,3 +294,32 @@ elif st.session_state.step == "result":
     if st.button("RETRY"):
         st.session_state.step = "setup"
         st.rerun()
+# 〜（中略：スコア計算やデータの定義など）〜
+
+# --- アプリ画面での割合表示部分 ---
+st.subheader("📊 4観点のバランス診断結果")
+st.write("各指標の割合（％）です。どちらの傾向が強いかチェックしてみましょう！")
+
+# 【注】実際のあなたのコードの計算結果（％の数値）をここに当てはめてください。
+# ここでは、前回のロジックに基づいた仮の数値（0〜100）を入れています。
+dimensions_pct = {
+    "興味の方向": {"left_label": "Extravert (外向)", "right_label": "Introvert (内向)", "val": 65},
+    "ものの見方": {"left_label": "Sensing (感覚)", "right_label": "Intuition (直感)", "val": 40},
+    "判断の仕方": {"left_label": "Thinking (思考)", "right_label": "Feeling (感情)", "val": 55},
+    "外界との接し方": {"left_label": "Judging (判断)", "right_label": "Perceiving (知覚)", "val": 70}
+}
+
+# 4つの観点をループで回してメーター形式で表示
+for title, data in dimensions_pct.items():
+    st.markdown(f"### 🧭 {title}")
+    
+    # 左右の要素の％を計算
+    left_pct = data["val"]
+    right_pct = 100 - data["val"]
+    
+    # テキストで綺麗に割合を表示
+    st.write(f"**{data['left_label']}** {left_pct}%  vs  {right_pct}% **{data['right_label']}**")
+    
+    # 標準機能のプログレスバーでメーターを表示（0.0 〜 1.0 の値にするため 100 で割る）
+    st.progress(left_pct / 100)
+    st.write("---") # 区切り線
