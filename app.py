@@ -506,31 +506,8 @@ elif st.session_state.step == "result":
         unsafe_allow_html=True
     )
 
-    # --- 🔢 カウントアップアニメーション付きスコア表示 ---
-    score = pattern["score"]
-    st.markdown(f"""
-        <p class="result-score" id="score-display">0%</p>
-        <script>
-        (function() {{
-            const target = {score};
-            const el = document.getElementById("score-display");
-            if (!el) return;
-            const duration = 1200;
-            const start = performance.now();
-            function step(now) {{
-                const progress = Math.min((now - start) / duration, 1);
-                const current = (target * progress);
-                el.textContent = current.toFixed(2).replace(/\\.00$/, '') + "%";
-                if (progress < 1) {{
-                    requestAnimationFrame(step);
-                }} else {{
-                    el.textContent = target + "%";
-                }}
-            }}
-            requestAnimationFrame(step);
-        }})();
-        </script>
-    """, unsafe_allow_html=True)
+    # --- 🔠 4文字コード表示 ---
+    st.markdown(f'<p class="result-score">{code}</p>', unsafe_allow_html=True)
 
     st.markdown(
         f'<p class="result-names">{st.session_state.name1}  ×  {st.session_state.name2}</p>',
