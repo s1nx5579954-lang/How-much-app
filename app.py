@@ -521,7 +521,7 @@ elif st.session_state.step == "result":
     else:
         st.info(f"画像が見つかりません: {image_path}（assetsフォルダに配置してください）")
 
-    # --- 🏷️ タイプ名表示 ---
+    
     st.markdown(f'<p class="result-type">{pattern["title"]}</p>', unsafe_allow_html=True)
     st.markdown(
         f'<p class="result-pair">{pattern["title_en"]} ｜ {pattern["pair"]}</p>',
@@ -529,7 +529,7 @@ elif st.session_state.step == "result":
     )
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- 📊 4観点ごとの一致率・Merge/Solitude等のキーワード・説明 ---
+  
     st.markdown('<div class="fade-in-delay-2">', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
     for dim in ["EI", "SN", "TF", "JP"]:
@@ -550,7 +550,6 @@ elif st.session_state.step == "result":
         )
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- 📝 診断コメント ---
     st.markdown('<div class="fade-in-delay-3">', unsafe_allow_html=True)
     st.markdown(f'<div class="result-comment">{pattern["desc"]}</div>', unsafe_allow_html=True)
 
