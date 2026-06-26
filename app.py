@@ -2,7 +2,6 @@ import streamlit as st
 import random
 import os
 
-# --- 🖤 洗練されたミニマルカスタムスタイル ---
 st.markdown("""
     <style>
     @keyframes fadeInUp {
@@ -128,9 +127,8 @@ st.markdown("""
 st.markdown('<p class="main-title fade-in">How Match</p>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title fade-in-delay-1">Simple 16-Type Synchronizer</p>', unsafe_allow_html=True)
 
-# --- 🧠 質問データ（4つの観点 × 各4問 = 計16問） ---
 QUESTIONS = [
-    # 1. 興味の方向（EI）
+
     {"dim": "EI", "q": "休日の過ごし方として、より惹かれるのは？", "opts": [
         {"text": "大勢でワイワイイベントやパーティーに参加する", "p": 2},
         {"text": "親しい友人2〜3人とカフェで楽しく話す", "p": 1},
@@ -155,7 +153,7 @@ QUESTIONS = [
         {"text": "じっくり文章（LINEやメール）に書いて伝える", "p": -1},
         {"text": "心の中に留めておくことが多く、あまり外に出さない", "p": -2}
     ]},
-    # 2. ものの見方（SN）
+   
     {"dim": "SN", "q": "映画や小説を見るとき、どこに一番惹かれる？", "opts": [
         {"text": "ハラハラするアクションや、映像の美しさ、分かりやすい面白さ", "p": 2},
         {"text": "登場人物のセリフや、現実的なストーリー展開", "p": 1},
@@ -180,7 +178,7 @@ QUESTIONS = [
         {"text": "相手が本当に言いたい「隠された本音」や意図", "p": -1},
         {"text": "その話が今後どんな展開につながっていくかという未来の予測", "p": -2}
     ]},
-    # 3. 判断の仕方（TF）
+  
     {"dim": "TF", "q": "友人が悩んで泣いているとき、最初にとる行動は？", "opts": [
         {"text": "まずは「大変だったね」と寄り添い、一緒に悲しむ", "p": 2},
         {"text": "相手の話を否定せず、ただじっくり聴いてあげる", "p": 1},
@@ -205,7 +203,7 @@ QUESTIONS = [
         {"text": "「仕事が早くて助かる」「頼りになるね」", "p": -1},
         {"text": "「頭が良いね」「考え方がすごく論理的で分かりやすい」", "p": -2}
     ]},
-    # 4. 外界との接し方（JP）
+   
     {"dim": "JP", "q": "宿題や仕事の期限があるとき、どう進める？", "opts": [
         {"text": "最初にきっちりスケジュールを立てて、計画通りに早めに終わらせる", "p": 2},
         {"text": "毎日少しずつ、均等に進めるよう努力する", "p": 1},
@@ -239,7 +237,7 @@ DIM_LABELS = {
     "JP": "外界との接し方（ペース・行動パターン）"
 }
 
-# 各観点における「一致(High)」「不一致(Low)」それぞれの文字・キーワード・説明
+
 DIM_LETTER_INFO = {
     "EI": {
         "high": {"letter": "M", "keyword": "Merge（マージ：融合）",
@@ -267,8 +265,7 @@ DIM_LETTER_INFO = {
     },
 }
 
-# --- 🎴 16パターンの相性結果データ ---
-# キー構成: EI(M/S) + SN(S/I) + TF(E/C) + JP(P/B)
+
 RESULT_PATTERNS = {
     "MSEP": {
         "pair": "柴犬 & シベリアンハスキー",
@@ -384,7 +381,7 @@ RESULT_PATTERNS = {
     },
 }
 
-# --- セッション状態の初期化 ---
+
 if 'step' not in st.session_state:
     st.session_state.step = "setup"
 if 'current_q' not in st.session_state:
@@ -408,7 +405,7 @@ def determine_pattern(p1_points, p2_points):
     各観点の一致率(rate)が50%以上ならHigh側、未満ならLow側とする。
     """
     rates = {}
-    sides = {}  # "high" or "low"
+    sides = {}  
     code = ""
     for dim in ["EI", "SN", "TF", "JP"]:
         rate = calc_match_rate(p1_points, p2_points, dim)
@@ -419,7 +416,6 @@ def determine_pattern(p1_points, p2_points):
     return code, rates, sides
 
 
-# --- 各ステップの処理 ---
 if st.session_state.step == "setup":
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
     st.subheader("PLAYER REGISTRATION")
@@ -506,7 +502,7 @@ elif st.session_state.step == "result":
         unsafe_allow_html=True
     )
 
-    # --- 🔠 4文字コード表示 ---
+   
     st.markdown(f'<p class="result-score">{code}</p>', unsafe_allow_html=True)
 
     st.markdown(
@@ -515,7 +511,7 @@ elif st.session_state.step == "result":
     )
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- 🐾 キャラクター画像表示 ---
+   
     st.markdown('<div class="fade-in-delay-1">', unsafe_allow_html=True)
     image_path = f"assets/{code}.png"
     if os.path.exists(image_path):
